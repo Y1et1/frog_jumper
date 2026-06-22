@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://udkx42vaf5hc"]
+
+[ext_resource type="Texture2D" uid="uid://4ifwuu4icw7l" path="res://assets/frog_green_spritesheet.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://u1hyeywf38q" path="res://scripts/player.gd" id="1_g2els"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(256, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(288, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(320, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(352, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(384, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(416, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qkyit"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}],
+"loop": 0,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}],
+"loop": 0,
+"name": &"landed",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ur7pv"]
+radius = 6.0
+height = 18.0
+
+[node name="player" type="CharacterBody2D" unique_id=1760349059 groups=["player"]]
+script = ExtResource("1_g2els")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=218910960]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_qkyit")
+animation = &"jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2012290804]
+position = Vector2(0, -6)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ur7pv")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=793536015]
+zoom = Vector2(2.055, 2.055)
+limit_left = -44
+
+[node name="power_bar" type="Node2D" parent="." unique_id=707437796]
+position = Vector2(-21, -5)
+
+[node name="jump_power_bar" type="ProgressBar" parent="power_bar" unique_id=77182217]
+offset_right = 76.92923
+offset_bottom = 9.27272
+rotation = -1.5707964
+max_value = 750.0
+step = 1.0
+show_percentage = false

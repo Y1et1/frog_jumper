@@ -1,0 +1,42 @@
+[gd_scene format=4 uid="uid://5sitmvclbyv5"]
+
+[ext_resource type="Script" uid="uid://b23ukvipncj2y" path="res://scripts/lvl_2.gd" id="1_djdqn"]
+[ext_resource type="TileSet" uid="uid://b3dku5jxiw2ge" path="res://assets/tileset_tileset.tres" id="1_iodtx"]
+[ext_resource type="PackedScene" uid="uid://udkx42vaf5hc" path="res://scenes/player.tscn" id="2_u233y"]
+[ext_resource type="PackedScene" uid="uid://b8n4x2qlw86m7" path="res://scenes/flag.tscn" id="3_ieorc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ieorc"]
+size = Vector2(79, 32)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_djdqn"]
+
+[node name="lvl_2" type="Node2D" unique_id=197405197]
+script = ExtResource("1_djdqn")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1131520126]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAJAAAAAAABAAAAAAAKAAAAAAABAAAAAAALAAAAAAACAAAAAAAKAAEAAAABAAIAAAALAAEAAAACAAIAAAAJAAEAAAABAAIAAAAIAAEAAAABAAIAAAAHAAEAAAABAAIAAAAGAAEAAAABAAIAAAAFAAEAAAABAAIAAAAEAAEAAAABAAIAAAADAAEAAAABAAIAAAACAAEAAAABAAIAAAABAAEAAAABAAIAAAAAAAEAAAAAAAIAAAARAAEAAAAAAAIAAAARAAAAAAAAAAEAAAASAAAAAAACAAEAAAASAP//AAACAAEAAAARAP//AAAAAAEAAAASAAEAAAACAAIAAAARAP7/AAAAAAAAAAASAP7/AAACAAAAAAAZAAEAAAAAAAAAAAAaAAEAAAABAAAAAAAbAAEAAAABAAAAAAAcAAEAAAABAAAAAAAdAAEAAAABAAAAAAAeAAEAAAABAAAAAAAfAAEAAAABAAAAAAAgAAEAAAACAAAAAAAgAAIAAAACAAIAAAAfAAIAAAABAAIAAAAeAAIAAAABAAIAAAAdAAIAAAABAAIAAAAcAAIAAAABAAIAAAAbAAIAAAABAAIAAAAaAAIAAAABAAIAAAAZAAIAAAAAAAIAAAAoAAcAAAAAAAIAAAAoAAYAAAAAAAAAAAApAAYAAAABAAAAAAApAAcAAAABAAIAAAAqAAcAAAACAAIAAAAqAAYAAAACAAAAAAA1AAUAAAAAAAIAAAA2AAUAAAABAAIAAAA3AAUAAAACAAIAAAA3AAQAAAAFAAAAAAA4AAQAAAACAAMAAAA2AAQAAAABAAAAAAA1AAQAAAAGAAAAAAA0AAQAAAAAAAMAAAA8AAQAAAAAAAAAAAA9AAQAAAABAAAAAAA+AAQAAAABAAAAAAA/AAQAAAABAAAAAABAAAQAAAAGAAAAAABBAAQAAAACAAAAAABBAAUAAAACAAEAAABBAAYAAAACAAIAAABAAAYAAAABAAIAAABAAAUAAAABAAEAAAA/AAUAAAABAAEAAAA+AAUAAAABAAEAAAA9AAUAAAABAAEAAAA9AAYAAAABAAIAAAA8AAUAAAAAAAEAAAA8AAYAAAAAAAIAAAA+AAYAAAABAAIAAAA/AAYAAAABAAIAAAA=")
+tile_set = ExtResource("1_iodtx")
+
+[node name="player" parent="." unique_id=1760349059 instance=ExtResource("2_u233y")]
+position = Vector2(28, -2)
+
+[node name="flag" parent="." unique_id=1828143082 instance=ExtResource("3_ieorc")]
+position = Vector2(1019, 37)
+
+[node name="win" type="Area2D" parent="." unique_id=33873056]
+position = Vector2(1009, 49)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="win" unique_id=1859734290]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_ieorc")
+
+[node name="deathzone" type="Node2D" parent="." unique_id=222795638]
+position = Vector2(433, 216)
+
+[node name="deathzone" type="Area2D" parent="deathzone" unique_id=777407809]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone/deathzone" unique_id=62737597]
+shape = SubResource("WorldBoundaryShape2D_djdqn")
+
+[connection signal="body_entered" from="win" to="." method="_on_win_body_entered"]
+[connection signal="body_entered" from="deathzone/deathzone" to="." method="_on_deathzone_body_entered"]

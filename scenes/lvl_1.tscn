@@ -1,0 +1,40 @@
+[gd_scene format=4 uid="uid://bwsdtdgacmsuk"]
+
+[ext_resource type="TileSet" uid="uid://b3dku5jxiw2ge" path="res://assets/tileset_tileset.tres" id="1_wgevm"]
+[ext_resource type="Script" uid="uid://d3hj335vib6cy" path="res://scripts/lvl_1.gd" id="1_yx8eg"]
+[ext_resource type="PackedScene" uid="uid://b8n4x2qlw86m7" path="res://scenes/flag.tscn" id="3_l8iau"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkyit"]
+size = Vector2(79, 32)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qkyit"]
+
+[node name="lvl1" type="Node2D" unique_id=146540317]
+script = ExtResource("1_yx8eg")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1137607855]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAIAAAABAAEAAAABAAIAAAABAAAAAAABAAAAAAACAAEAAAABAAIAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAADAAEAAAABAAIAAAAEAAEAAAABAAIAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAFAAEAAAABAAIAAAAGAAAAAAABAAAAAAAGAAEAAAABAAIAAAAHAAEAAAABAAIAAAAHAAAAAAABAAAAAAAIAAEAAAABAAIAAAAIAAAAAAABAAAAAAAJAAEAAAABAAIAAAAJAAAAAAABAAAAAAAKAAEAAAABAAIAAAAKAAAAAAABAAAAAAALAAAAAAABAAAAAAALAAEAAAABAAIAAAAMAAEAAAABAAIAAAAMAAAAAAABAAAAAAANAAEAAAABAAIAAAANAAAAAAABAAAAAAAOAAEAAAACAAIAAAAOAAAAAAACAAAAAAARAP//AAAAAAIAAAASAP//AAABAAIAAAASAP7/AAABAAAAAAARAP7/AAAAAAAAAAATAP7/AAABAAAAAAAUAP7/AAACAAAAAAAUAP//AAACAAIAAAATAP//AAABAAIAAAAVAPv/AAAAAAAAAAAWAPv/AAACAAAAAAAWAPz/AAACAAIAAAAVAPz/AAAAAAIAAAAbAPn/AAAAAAAAAAAcAPn/AAABAAAAAAAdAPn/AAABAAAAAAAeAPn/AAABAAAAAAAfAPn/AAACAAAAAAAfAPr/AAACAAIAAAAeAPr/AAABAAIAAAAdAPr/AAABAAIAAAAcAPr/AAABAAIAAAAbAPr/AAAAAAIAAAA=")
+tile_set = ExtResource("1_wgevm")
+
+[node name="win" type="Area2D" parent="." unique_id=1731820107]
+position = Vector2(471, -128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="win" unique_id=1324943012]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_qkyit")
+
+[node name="flag" parent="." unique_id=1828143082 instance=ExtResource("3_l8iau")]
+position = Vector2(482, -139)
+
+[node name="deathzone" type="Node2D" parent="." unique_id=1412286684]
+position = Vector2(296, 95)
+
+[node name="deathzone" type="Area2D" parent="deathzone" unique_id=878177893]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone/deathzone" unique_id=1614569710]
+shape = SubResource("WorldBoundaryShape2D_qkyit")
+
+[connection signal="body_entered" from="win" to="." method="_on_win_body_entered"]
+[connection signal="body_entered" from="win" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="deathzone/deathzone" to="." method="_on_deathzone_body_entered"]
+[connection signal="body_entered" from="deathzone/deathzone" to="." method="_on_area_2d_body_entered"]
