@@ -38,5 +38,8 @@ position = Vector2(433, 216)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone/deathzone" unique_id=62737597]
 shape = SubResource("WorldBoundaryShape2D_djdqn")
 
+[node name="wintimer" type="Timer" parent="." unique_id=49803108]
+
 [connection signal="body_entered" from="win" to="." method="_on_win_body_entered"]
 [connection signal="body_entered" from="deathzone/deathzone" to="." method="_on_deathzone_body_entered"]
+[connection signal="timeout" from="wintimer" to="." method="_on_wintimer_timeout"]
