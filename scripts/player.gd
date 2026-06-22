@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 var JUMP_VELOCITY = 0
 var JUMP_POWER = 0
-const power_speed = 350
+const power_speed = 450
 
 func _physics_process(delta: float) -> void:
 	
